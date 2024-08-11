@@ -37,13 +37,13 @@ namespace HybridTutorials.InteractionWithGameobject
             var infos = targetQuery.ToComponentDataArray<TeamInfo>(state.WorldUpdateAllocator);
             var transforms = targetQuery.ToComponentDataArray<LocalTransform>(state.WorldUpdateAllocator);
 
-            var noPartitioning = new FindNearestJob
+            var find = new FindNearestJob
             {
                 AllInfos = infos,
                 AllEntities = entities,
                 AllTransforms = transforms
             };
-            state.Dependency = noPartitioning.ScheduleParallel(state.Dependency);
+            state.Dependency = find.ScheduleParallel(state.Dependency);
         }
 
 
@@ -56,7 +56,7 @@ namespace HybridTutorials.InteractionWithGameobject
 
             [ReadOnly] public NativeArray<Entity> AllEntities;
 
-            public void Execute(ref TargetResult result, TargetRequest targetRequest, in LocalTransform transform)
+            public void Execute(ref TargetResult result, in TargetRequest targetRequest, in LocalTransform transform)
             {
                 var closestDistSq = 999f;
                 var closestEntity = Entity.Null;

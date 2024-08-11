@@ -27,8 +27,6 @@ namespace HybridTutorials.InteractionWithGameobject
 
         private float shootTime = 0;
 
-        private Transform mTarget;
-
         // Start is called before the first frame update
         void Awake()
         {
